@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Dual Band Thermal Videography: Separating Time-Varying Reflection and Emission Near Ambient Conditions">
+  <meta name="keywords" content="Thermal Imaging, Thermal Spectral Filters">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dual Band Thermal Videography: Separating Time-Varying Reflection and Emission Near Ambient Conditions</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Google+Sans&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  <style>
+    :root {
+      --bg-top: #f4f7ff;
+      --bg-mid: #f8f5ff;
+      --bg-bottom: #fcfdff;
+      --surface: #ffffff;
+      --surface-soft: #f8faff;
+      --text-primary: #1f2a44;
+      --text-secondary: #4b587c;
+      --accent: #4d6cff;
+      --accent-soft: #e8edff;
+      --border-soft: #e6ebff;
+      --shadow-soft: 0 10px 30px rgba(43, 62, 148, 0.08);
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Noto Sans', sans-serif;
+      color: var(--text-primary);
+      background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+    }
+
+    .publication-title {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      color: var(--text-primary);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      letter-spacing: 0;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+      text-wrap: balance;
+    }
+
+    .title-gradient {
+      background: linear-gradient(100deg, #4d6cff 0%, #8a57ff 45%, #2f8cff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .publication-authors {
+      color: var(--text-secondary);
+      font-size: 1.22rem;
+      margin-top: 1.25rem;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .publication-authors .author-list {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      column-gap: 0.95rem;
+      row-gap: 0.25rem;
+    }
+
+    .publication-authors .author-sep {
+      color: #7c88b2;
+      font-size: 0.95em;
+    }
+
+    .publication-authors .author-link {
+      color: #3d4f8a;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .publication-authors .author-link:hover {
+      color: var(--accent);
+      border-color: rgba(77, 108, 255, 0.4);
+    }
+
+    .publication-affiliation {
+      color: #5a688f;
+      font-size: 1.12rem;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.15rem;
+    }
+
+    .publication-venue-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .hero {
+      background: transparent;
+      padding: 3.75rem 0 1rem 0;
+    }
+
+    .hero .hero-body {
+      padding: 0.5rem 0;
+    }
+
+    .section {
+      padding: 1.5rem 0.5rem;
+      max-width: 100%;
+    }
+
+    .container.is-fluid {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .publication-links {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .publication-links .button {
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 4px 16px rgba(55, 82, 199, 0.09);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .publication-links .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 20px rgba(55, 82, 199, 0.16);
+    }
+
+    .button.is-primary:hover {
+      box-shadow: 0 10px 24px rgba(77, 108, 255, 0.35);
+    }
+
+    .button.is-primary {
+      background-color: var(--accent);
+      color: #fff;
+    }
+
+    .button.is-soft {
+      background-color: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .button.is-coming-soon {
+      background-color: #f1f4ff;
+      color: #6b75a2;
+      border-color: var(--border-soft);
+      cursor: default;
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    .example-container {
+      margin-bottom: 2rem;
+      background-color: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      padding: 1rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .example-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(48, 72, 172, 0.12);
+    }
+    
+    .example-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+    
+    .explanation-text {
+      background-color: var(--surface-soft);
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin: 0.05rem 0 0.05rem 0;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      /* border-left: 4px solid #3273dc; */
+    }
+    
+    .video-container {
+      margin-top: 1rem;
+    }
+    
+    .columns {
+      margin: 0 !important;
+    }
+    
+    .column {
+      padding: 0.5rem;
+    }
+    
+    .video-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    
+    .column-heading {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 0.5rem 0;
+      text-align: center;
+      color: var(--accent);
+    }
+    
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%; /* 4:3 Aspect Ratio for larger videos */
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #000;
+      border-radius: 4px;
+    }
+    
+    .title.is-3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .section-title {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #2c3f80;
+      position: relative;
+      margin-bottom: 0.9rem !important;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 3px;
+      margin-top: 0.35rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #4d6cff 0%, #8a57ff 100%);
+    }
+    
+    .speed-control {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 1rem;
+      vertical-align: middle;
+    }
+    
+    .speed-control label {
+      margin-right: 0.5rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    
+    .speed-slider {
+      width: 100px;
+      margin-right: 0.5rem;
+    }
+    
+    .speed-value {
+      font-weight: bold;
+      min-width: 3em;
+      text-align: left;
+    }
+    
+    .abstract {
+      background-color: var(--surface);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 1.5rem;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .abstract:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(48, 72, 172, 0.14);
+    }
+
+    .main-video-column {
+      max-width: 980px;
+    }
+
+    .main-video-frame {
+      border-radius: 14px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 12px 34px rgba(49, 74, 173, 0.14);
+      overflow: hidden;
+      background: #0f1220;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .main-video-frame:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(49, 74, 173, 0.2);
+    }
+
+    .results-panel {
+      padding: 1.25rem;
+    }
+
+    .results-intro {
+      color: var(--text-secondary);
+      margin: 0.2rem 0 1.1rem 0;
+    }
+
+    .selected-result-container .example-container {
+      margin-bottom: 1rem;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+
+    .selected-result-container .result-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .selected-result-container .result-item .video-container {
+      order: 1;
+    }
+
+    .selected-result-container .result-item .example-header {
+      display: none;
+    }
+
+    .selected-result-container .result-item .explanation-text {
+      order: 2;
+      margin-top: 0.8rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .selected-result-container .column-heading {
+      font-size: 1rem;
+    }
+
+    .selected-result-container .video-title {
+      font-size: 0.84rem;
+    }
+
+    .result-item {
+      display: none;
+    }
+
+    .selected-result-container .result-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .thumbnail-band {
+      margin-top: 0.5rem;
+      padding: 0.65rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: linear-gradient(180deg, #f7f9ff 0%, #eff3ff 100%);
+    }
+
+    .thumbnail-band-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #5f6d98;
+      text-align: center;
+      margin-bottom: 0.55rem;
+      font-weight: 700;
+    }
+
+    .result-carousel-nav {
+      display: grid;
+      grid-template-columns: 42px 1fr 42px;
+      gap: 0.55rem;
+      align-items: center;
+    }
+
+    .result-nav-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      color: #5a6ed1;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(72, 93, 186, 0.16);
+    }
+
+    .result-nav-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(72, 93, 186, 0.24);
+    }
+
+    .result-nav-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .result-thumbnails {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0.75rem;
+      min-height: 145px;
+    }
+
+    .result-thumb {
+      width: 192px;
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      background: #ffffff;
+      cursor: pointer;
+      padding: 0.55rem 0.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 4px 14px rgba(35, 49, 120, 0.11);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .result-thumb:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 9px 20px rgba(35, 49, 120, 0.19);
+    }
+
+    .result-thumb.active {
+      border-color: #6c7dff;
+      box-shadow: 0 11px 24px rgba(76, 103, 255, 0.28);
+    }
+
+    .thumb-image {
+      width: 100%;
+      height: 92px;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(99, 118, 201, 0.25);
+      background: #dde5ff;
+    }
+
+    .thumb-image-fallback {
+      width: 100%;
+      height: 92px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(125deg, #5f7aff 0%, #7f68ff 100%);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .result-thumb .thumb-label {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: #2f3f7b;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .result-dots {
+      margin-top: 0.65rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .result-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: none;
+      background: #c7d0f5;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .result-dot:hover {
+      transform: scale(1.12);
+    }
+
+    .result-dot.is-active {
+      background: #5f7aff;
+      transform: scale(1.15);
+    }
+
+    .bibtex-panel {
+      margin-top: 1.5rem;
+      padding: 1.1rem 1.1rem 0.9rem 1.1rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .bibtex-code {
+      margin-top: 0.8rem;
+      margin-bottom: 0.3rem;
+      padding: 0.95rem;
+      border-radius: 10px;
+      border: 1px solid #dbe3ff;
+      background: #f8faff;
+      color: #23315f;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    
+    .footer {
+      background-color: var(--surface);
+      border: 1px solid var(--border-soft);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+    }
+    
+    .instructions {
+      background-color: var(--surface-soft);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Adjustments for larger screens */
+    @media screen and (min-width: 1408px) {
+      .container.is-fluid {
+        max-width: 1280px !important;
+      }
+      
+      .video-wrapper {
+        padding-bottom: 85%; /* Taller videos on larger screens */
+      }
+    }
+    
+    /* Fix for mobile */
+    @media screen and (max-width: 768px) {
+      .hero {
+        padding-top: 2.4rem;
+      }
+
+      .publication-title {
+        font-size: clamp(1.7rem, 9vw, 2.2rem) !important;
+        line-height: 1.15;
+      }
+
+      .publication-authors {
+        font-size: 1.08rem;
+        margin-top: 1rem;
+        line-height: 1.6;
+      }
+
+      .publication-affiliation {
+        font-size: 1.0rem;
+        margin-bottom: 1rem;
+      }
+
+      .result-carousel-nav {
+        grid-template-columns: 36px 1fr 36px;
+        gap: 0.4rem;
+      }
+
+      .result-nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.05rem;
+      }
+
+      .result-thumbnails {
+        gap: 0.5rem;
+      }
+
+      .result-thumb {
+        width: 136px;
+        padding: 0.42rem 0.34rem;
+      }
+
+      .thumb-image {
+        height: 70px;
+        font-size: 0.72rem;
+      }
+
+      .result-thumb .thumb-label {
+        font-size: 0.75rem;
+      }
+
+      .columns.is-mobile {
+        display: block;
+      }
+      
+      .column.is-3 {
+        width: 100%;
+      }
+      
+      .example-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .speed-control {
+        margin: 0.5rem 0 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-fluid">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><span class="title-gradient">Dual Band Thermal Videography</span>: <br> Separating Time-Varying Reflection and Emission Near Ambient Conditions</h1>
+          <p class="publication-authors">
+            <span class="author-list">
+              <a class="author-link" href="https://nnsriram97.github.io/" target="_blank" rel="noopener noreferrer">Sriram Narayanan</a>
+              <span class="author-sep">&middot;</span>
+              <a class="author-link" href="https://marvils.org/mani.html" target="_blank" rel="noopener noreferrer">Mani Ramanagopal</a>
+              <span class="author-sep">&middot;</span>
+              <a class="author-link" href="https://www.cs.cmu.edu/~srinivas/" target="_blank" rel="noopener noreferrer">Srinivasa Narasimhan</a>
+            </span>
+          </p>
+          <p class="publication-affiliation">Carnegie Mellon University</p>
+          <div class="publication-venue-badge">
+            <!-- <i class="fas fa-award"></i> -->
+            <span>CVPR 2026</span>
+          </div>
+          
+          <div class="column has-text-centered">
+            <div class="publication-links">
+                <span class="link-block">
+                <a href="#abstract-section" class="button is-normal is-rounded is-soft">
+                  <span class="icon">
+                    <i class="fas fa-align-left"></i>
+                  </span>
+                  <span>Abstract</span>
+                </a>
+                </span>
+
+                <span class="link-block">
+                <a href="#video-section" class="button is-normal is-rounded is-soft">
+                  <span class="icon">
+                    <i class="fas fa-video"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+                </span>
+
+                <span class="link-block">
+                <a href="#results-section" class="button is-normal is-rounded is-soft">
+                  <span class="icon">
+                    <i class="fas fa-th-large"></i>
+                  </span>
+                  <span>Results</span>
+                </a>
+                </span>
+
+                <span class="link-block">
+                <a href="#bibtex-section" class="button is-normal is-rounded is-soft">
+                  <span class="icon">
+                    <i class="fas fa-quote-right"></i>
+                  </span>
+                  <span>BibTeX</span>
+                </a>
+                </span>
+
+                <span class="link-block">
+                <a href="https://arxiv.org/abs/2509.11334" class="button is-normal is-rounded is-soft">
+                  <span class="icon">
+                    <i class="fas fa-box-archive"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+                </span>
+                <!-- <span class="link-block">
+                <a href="./appendix.pdf" target="_blank" class="button is-normal is-rounded is-soft">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Supplementary PDF</span>
+                </a>
+                </span>
+                -->
+                <span class="link-block">
+                  <a href="#" onclick="return false;" class="button is-normal is-rounded is-coming-soon" aria-disabled="true">
+                    <span class="icon">
+                      <i class="fas fa-code"></i>
+                    </span>
+                    <span>Code (Coming Soon)</span>
+                  </a>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-fluid">
+    <!-- Abstract Section -->
+    <div class="abstract" id="abstract-section">
+      <h2 class="title is-4 section-title">Abstract</h2>
+      <p>
+      Long-wave infrared radiation captured by a thermal camera includes (a) emission from an object governed by its temperature and emissivity, and (b) reflected radiation from the surrounding environment. Separating these components is a long-standing challenge in thermography. Even when using multiple bands, the problem is under-determined without priors on emissivity. This difficulty is amplified in near ambient conditions, where emitted and reflected signals are of comparable magnitude. We present a dual-band video thermography framework that reduces this ambiguity by combining two complementary ideas at a per-pixel level: (i) spectral cues (ratio of emissivity between bands is unknown but fixed), and (ii) temporal cues (object radiation changes smoothly while background radiation changes rapidly). We derive an image formation model and an algorithm to jointly estimate the object's emissivity at each band, and the time-varying object and background temperatures. Experiments with calibrated and uncalibrated emissivities in everyday scenes (e.g., coffee pot heating up, palm print on mirrors, reflections of moving people), demonstrate robust separation and recovery of temperature fields. 
+      </p>
+    </div>
+
+    <div class="example-container" id="video-section">
+      <h2 class="title is-3 section-title">Video</h2>
+      <div class="video-container">
+        <div class="columns is-centered">
+          <div class="column is-8 main-video-column">
+            <div class="main-video-frame">
+              <video id="supp-video" controls preload="metadata" playsinline style="width: 100%; height: auto; display: block;">
+                <source src="processed_videos/supp_video_dbvt.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example-container results-panel" id="results-section">
+      <h2 class="title is-3 section-title">Results</h2>
+      <p class="results-intro">
+        Select a scene thumbnail to view the corresponding decomposition videos and explanation.
+      </p>
+      <div id="selected-result-container" class="selected-result-container"></div>
+      <div class="thumbnail-band">
+        <div class="thumbnail-band-title">Scene Thumbnails</div>
+        <div class="result-carousel-nav">
+          <button id="results-prev" class="result-nav-btn" aria-label="Previous result">&lsaquo;</button>
+          <div id="result-thumbnails" class="result-thumbnails"></div>
+          <button id="results-next" class="result-nav-btn" aria-label="Next result">&rsaquo;</button>
+        </div>
+        <div id="result-dots" class="result-dots"></div>
+      </div>
+    </div>
+    <div id="results-storage" style="display: none;"></div>
+
+    <!-- Example 1: Coffee-Pot -->
+    <div class="example-container result-item" id="example-1">
+      <div class="example-header">
+        <h2 class="title is-3">Coffee-Pot</h2>
+        <div class="speed-control">
+          <label for="coffee-speed">Playback Speed:</label>
+          <input type="range" min="0.5" max="5" step="0.1" value="2.5" class="speed-slider" id="coffee-speed">
+          <span class="speed-value">2.5x</span>
+        </div>
+      </div>
+      
+      <!-- Explanation text for Coffee-Pot example -->
+      <div class="explanation-text">
+        <p>A borosilicate coffee pot contining hot liquid shows heat propagation on its surface, while a person moves in the background, waving their hands and uncovering a heat source.</p>
+      </div>
+      
+      <div class="video-container">
+        <div class="columns is-mobile">
+          <!-- Column 1: Thermal Videos -->
+          <div class="column is-3">
+            <h3 class="column-heading">Thermal Band Videos (Inputs)</h3>
+            
+            <h3 class="video-title">8-14 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot-0-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">9.25-9.75 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot-1-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 2: Calibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Calibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot_calib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot_calib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 3: Uncalibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Uncalibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot_uncalib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot_uncalib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 4: Iso-Contour Lines of Temperature -->
+          <div class="column is-3">
+            <h3 class="column-heading">Iso-Contour Lines of Temperature</h3>
+            
+            <h3 class="video-title">Calibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot_calib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Uncalibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/coffeepot_uncalib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example 2: Incandescent Bulb -->
+    <div class="example-container result-item" id="example-2">
+      <div class="example-header">
+        <h2 class="title is-3">Incandescent Bulb</h2>
+        <div class="speed-control">
+          <label for="bulb-speed">Playback Speed:</label>
+          <input type="range" min="0.5" max="5" step="0.1" value="2.5" class="speed-slider" id="bulb-speed">
+          <span class="speed-value">2.5x</span>
+        </div>
+      </div>
+      
+      <!-- Explanation text for Incandescent Bulb example -->
+      <div class="explanation-text">
+        <p> An example that showcases our method operating in extremely low signal to noise ratio regime. A person transfers heat through hand contact onto an incandescent bulb. A person transfers heat to an incandescent bulb through hand contact, leaving a thermal fingerprint that gradually dissipates. Our uncalibrated method successfully separates the emission due to palm print from reflection of a person walking around and sipping a hot beverage.</p>
+      </div>
+      
+      <div class="video-container">
+        <div class="columns is-mobile">
+          <!-- Column 1: Thermal Videos -->
+          <div class="column is-3">
+            <h3 class="column-heading">Thermal Band Videos (Inputs)</h3>
+            
+            <h3 class="video-title">8-14 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan-bulb-0-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">9.25-9.75 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan-bulb-1-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 2: Calibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Calibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan_calib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan_calib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 3: Uncalibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Uncalibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan_uncalib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan_uncalib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 4: Iso-Contour Lines of Temperature -->
+          <div class="column is-3">
+            <h3 class="column-heading">Iso-Contour Lines of Temperature</h3>
+            
+            <h3 class="video-title">Calibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan_calib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Uncalibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/incan_uncalib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example 3: Glass Plate -->
+    <div class="example-container result-item" id="example-3">
+      <div class="example-header">
+        <h2 class="title is-3">Glass Plate</h2>
+        <div class="speed-control">
+          <label for="glass-speed">Playback Speed:</label>
+          <input type="range" min="0.5" max="5" step="0.1" value="2.5" class="speed-slider" id="glass-speed">
+          <span class="speed-value">2.5x</span>
+        </div>
+      </div>
+      
+      <!-- Explanation text for Glass Plate example -->
+      <div class="explanation-text">
+        <p>
+          In this example, a hot air gun is placed behind a glass plate to raise its temperature. The background reflection captures hand movements, light from a lighter, and a hand-inscribed "CV" text on a nearby board. These generate a faint thermal patterns on the glass, successfully separated by our method.
+        </p> 
+      </div>
+      
+      <div class="video-container">
+        <div class="columns is-mobile">
+          <!-- Column 1: Thermal Videos -->
+          <div class="column is-3">
+            <h3 class="column-heading">Thermal Band Videos (Inputs)</h3>
+            
+            <h3 class="video-title">8-14 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate-0-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">9.25-9.75 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate-1-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 2: Calibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Calibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate_calib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate_calib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 3: Uncalibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Uncalibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate_uncalib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate_uncalib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 4: Iso-Contour Lines of Temperature -->
+          <div class="column is-3">
+            <h3 class="column-heading">Iso-Contour Lines of Temperature</h3>
+            
+            <h3 class="video-title">Calibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate_calib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Uncalibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/glass-plate_uncalib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example 4: Wineglass -->
+    <div class="example-container result-item" id="example-4">
+      <div class="example-header">
+        <h2 class="title is-3">Wineglass</h2>
+        <div class="speed-control">
+          <label for="wine-speed">Playback Speed:</label>
+          <input type="range" min="0.5" max="5" step="0.1" value="2.5" class="speed-slider" id="wine-speed">
+          <span class="speed-value">2.5x</span>
+        </div>
+      </div>
+      
+      <!-- Explanation text for Wineglass example -->
+      <div class="explanation-text">
+        <p>
+          Hot liquid is poured into a wineglass, with heat gradually spreading across its surface. In the background, a person performs actions like waving their hands.
+        </p>
+      </div>
+      
+      <div class="video-container">
+        <div class="columns is-mobile">
+          <!-- Column 1: Thermal Videos -->
+          <div class="column is-3">
+            <h3 class="column-heading">Thermal Band Videos (Inputs)</h3>
+            
+            <h3 class="video-title">8-14 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass-0-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">9.25-9.75 microns</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass-1-bg.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 2: Calibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Calibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass_calib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass_calib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 3: Uncalibrated Results -->
+          <div class="column is-3">
+            <h3 class="column-heading">Uncalibrated Thermography</h3>
+            
+            <h3 class="video-title">Object Temperature</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass_uncalib_Totemp_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Background Reflections</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass_uncalib_Tbdiff_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          
+          <!-- Column 4: Iso-Contour Lines of Temperature -->
+          <div class="column is-3">
+            <h3 class="column-heading">Iso-Contour Lines of Temperature</h3>
+            
+            <h3 class="video-title">Calibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass_calib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            
+            <h3 class="video-title">Uncalibrated Approach</h3>
+            <div class="video-wrapper">
+              <video controls preload="metadata" playsinline autoplay muted loop>
+                <source src="processed_videos/wineglass_uncalib_Tocontour_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bibtex-panel" id="bibtex-section">
+      <h2 class="title is-4 section-title">BibTeX</h2>
+      <pre class="bibtex-code">@inproceedings{narayanan2026dual,
+  title     = {Dual Band Thermal Videography: Separating Time-Varying Reflection and Emission Near Ambient Conditions},
+  author    = {Narayanan, Sriram and Ramanagopal, Mani and Narasimhan, Srinivasa},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026}
+}</pre>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all videos with default speed of 2.5x (except supplementary video)
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(video => {
+      if (video.id !== 'supp-video') {
+        video.playbackRate = 2.5;
+      }
+    });
+    
+    // Set up speed control sliders for each example
+    const examples = document.querySelectorAll('.example-container');
+    examples.forEach((example, index) => {
+      if (!example.id) {
+        const exampleId = `example-${index + 1}`;
+        example.id = exampleId;
+      }
+      
+      // Get the speed slider for this example
+      const speedSlider = example.querySelector('.speed-slider');
+      if (!speedSlider) {
+        return;
+      }
+      
+      // Get all videos in this example
+      const videos = example.querySelectorAll('video');
+      
+      // Set up the change event for the slider
+      speedSlider.addEventListener('input', function() {
+        const speed = parseFloat(this.value);
+        // Update the speed display
+        example.querySelector('.speed-value').textContent = speed.toFixed(1) + 'x';
+        
+        // Apply the new speed to all videos in this example
+        videos.forEach(video => {
+          video.playbackRate = speed;
+        });
+      });
+    });
+
+    // Show one result scene at a time with clickable thumbnails.
+    const resultItems = Array.from(document.querySelectorAll('.result-item'));
+    const selectedContainer = document.getElementById('selected-result-container');
+    const thumbnailContainer = document.getElementById('result-thumbnails');
+    const storageContainer = document.getElementById('results-storage');
+
+    if (resultItems.length && selectedContainer && thumbnailContainer && storageContainer) {
+      const thumbButtons = [];
+      const dotsContainer = document.getElementById('result-dots');
+      const prevButton = document.getElementById('results-prev');
+      const nextButton = document.getElementById('results-next');
+      const thumbnailPathByResultId = {
+        'example-1': 'processed_videos/thumbnails/coffeepot.jpg',
+        'example-2': 'processed_videos/thumbnails/incan-bulb.jpg',
+        'example-3': 'processed_videos/thumbnails/glass-plate.jpg',
+        'example-4': 'processed_videos/thumbnails/wineglass.jpg'
+      };
+      let currentIndex = 0;
+
+      const showResult = (index) => {
+        currentIndex = (index + resultItems.length) % resultItems.length;
+        resultItems.forEach((item, itemIndex) => {
+          if (itemIndex === currentIndex) {
+            selectedContainer.appendChild(item);
+          } else {
+            storageContainer.appendChild(item);
+          }
+        });
+
+        thumbButtons.forEach((btn, btnIndex) => {
+          btn.classList.toggle('active', btnIndex === currentIndex);
+        });
+
+        if (dotsContainer) {
+          const dots = dotsContainer.querySelectorAll('.result-dot');
+          dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle('is-active', dotIndex === currentIndex);
+          });
+        }
+      };
+
+      resultItems.forEach((item, index) => {
+        const titleElement = item.querySelector('.example-header .title.is-3');
+        const title = titleElement ? titleElement.textContent.trim() : `Result ${index + 1}`;
+
+        const thumbButton = document.createElement('button');
+        thumbButton.type = 'button';
+        thumbButton.className = 'result-thumb';
+        thumbButton.setAttribute('aria-label', `Show ${title} results`);
+        thumbButton.title = `Show ${title}`;
+
+        const thumbnailPath = thumbnailPathByResultId[item.id];
+        if (thumbnailPath) {
+          const thumbImage = document.createElement('img');
+          thumbImage.className = 'thumb-image';
+          thumbImage.src = thumbnailPath;
+          thumbImage.alt = `${title} thumbnail`;
+          thumbImage.loading = 'lazy';
+          thumbImage.onerror = () => {
+            const fallback = document.createElement('div');
+            fallback.className = 'thumb-image-fallback';
+            fallback.textContent = `#${index + 1}`;
+            thumbImage.replaceWith(fallback);
+          };
+          thumbButton.appendChild(thumbImage);
+        } else {
+          const fallback = document.createElement('div');
+          fallback.className = 'thumb-image-fallback';
+          fallback.textContent = `#${index + 1}`;
+          thumbButton.appendChild(fallback);
+        }
+
+        const label = document.createElement('span');
+        label.className = 'thumb-label';
+        label.textContent = title;
+        thumbButton.appendChild(label);
+
+        thumbButton.addEventListener('click', () => {
+          showResult(index);
+          selectedContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        thumbnailContainer.appendChild(thumbButton);
+        thumbButtons.push(thumbButton);
+      });
+
+      if (dotsContainer) {
+        resultItems.forEach((item, index) => {
+          const titleElement = item.querySelector('.example-header .title.is-3');
+          const title = titleElement ? titleElement.textContent.trim() : `Result ${index + 1}`;
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'result-dot';
+          dot.setAttribute('aria-label', `Go to ${title}`);
+          dot.addEventListener('click', () => showResult(index));
+          dotsContainer.appendChild(dot);
+        });
+      }
+
+      if (prevButton) {
+        prevButton.addEventListener('click', () => showResult(currentIndex - 1));
+      }
+      if (nextButton) {
+        nextButton.addEventListener('click', () => showResult(currentIndex + 1));
+      }
+
+      showResult(currentIndex);
+    }
+  });
+</script>
+
+</body>
+</html>

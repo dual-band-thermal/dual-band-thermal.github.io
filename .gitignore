@@ -1,0 +1,3 @@
+# Ignore all mp4 files
+processed_videos/
+**.DS_Store
