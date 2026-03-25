@@ -16,11 +16,12 @@
   
   <style>
     :root {
-      --bg-top: #f4f7ff;
-      --bg-mid: #f8f5ff;
-      --bg-bottom: #fcfdff;
-      --surface: #ffffff;
-      --surface-soft: #f8faff;
+      --bg-top: #e7efff;
+      --bg-mid: #ede9ff;
+      --bg-bottom: #f6f8ff;
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-soft: rgba(248, 250, 255, 0.76);
+      --surface-strong: rgba(255, 255, 255, 0.84);
       --text-primary: #1f2a44;
       --text-secondary: #4b587c;
       --accent: #4d6cff;
@@ -40,7 +41,31 @@
     body {
       font-family: 'Noto Sans', sans-serif;
       color: var(--text-primary);
-      background: linear-gradient(160deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 14% 16%, rgba(77, 108, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 84% 12%, rgba(138, 87, 255, 0.15), transparent 28%),
+        linear-gradient(160deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+    }
+
+    #thermal-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .hero,
+    .section {
+      position: relative;
+      z-index: 1;
     }
 
     .publication-title {
@@ -101,6 +126,13 @@
       font-size: 1.12rem;
       letter-spacing: 0.01em;
       margin-bottom: 1.15rem;
+    }
+
+    .publication-affiliation-logo {
+      display: inline-block;
+      max-width: min(260px, 82vw);
+      width: 100%;
+      height: auto;
     }
 
     .publication-venue-badge {
@@ -184,6 +216,8 @@
       border: 1px solid var(--border-soft);
       border-radius: 12px;
       box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 1rem;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
@@ -314,6 +348,8 @@
       padding: 1rem;
       border-radius: 12px;
       box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       margin-bottom: 1.5rem;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
@@ -399,7 +435,9 @@
       padding: 0.65rem 0.8rem;
       border-radius: 10px;
       border: 1px solid var(--border-soft);
-      background: linear-gradient(180deg, #f7f9ff 0%, #eff3ff 100%);
+      background: linear-gradient(180deg, rgba(247, 249, 255, 0.8) 0%, rgba(239, 243, 255, 0.7) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .thumbnail-band-title {
@@ -424,7 +462,7 @@
       height: 42px;
       border-radius: 999px;
       border: 1px solid var(--border-soft);
-      background: #ffffff;
+      background: var(--surface-strong);
       color: #5a6ed1;
       font-size: 1.25rem;
       font-weight: 700;
@@ -460,7 +498,7 @@
       width: 192px;
       border: 1px solid var(--border-soft);
       border-radius: 10px;
-      background: #ffffff;
+      background: var(--surface-strong);
       cursor: pointer;
       padding: 0.55rem 0.5rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -546,8 +584,27 @@
       padding: 1.1rem 1.1rem 0.9rem 1.1rem;
       border: 1px solid var(--border-soft);
       border-radius: 12px;
-      background: #ffffff;
+      background: var(--surface-strong);
       box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .acknowledgement-panel {
+      margin-top: 1.5rem;
+      padding: 1.1rem;
+      border: 1px solid var(--border-soft);
+      border-radius: 12px;
+      background: var(--surface-strong);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .acknowledgement-panel p {
+      margin: 0;
+      color: var(--text-secondary);
+      line-height: 1.6;
     }
 
     .bibtex-code {
@@ -556,7 +613,7 @@
       padding: 0.95rem;
       border-radius: 10px;
       border: 1px solid #dbe3ff;
-      background: #f8faff;
+      background: rgba(248, 250, 255, 0.82);
       color: #23315f;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       font-size: 0.9rem;
@@ -681,7 +738,9 @@
               <a class="author-link" href="https://www.cs.cmu.edu/~srinivas/" target="_blank" rel="noopener noreferrer">Srinivasa Narasimhan</a>
             </span>
           </p>
-          <p class="publication-affiliation">Carnegie Mellon University</p>
+          <p class="publication-affiliation">
+            <img src="./static/images/CMU.png" alt="Carnegie Mellon University" class="publication-affiliation-logo">
+          </p>
           <div class="publication-venue-badge">
             <!-- <i class="fas fa-award"></i> -->
             <span>CVPR 2026</span>
@@ -1239,9 +1298,19 @@
   year      = {2026}
 }</pre>
     </div>
+
+    <div class="acknowledgement-panel" id="acknowledgements-section">
+      <h2 class="title is-4 section-title">Acknowledgements</h2>
+      <p>
+        This work was partly supported by NSF grants IIS-2107236, and NSF-NIFA AI Institute for Resilient Agriculture.
+      </p>
+    </div>
   </div>
 </section>
 
+<canvas id="thermal-canvas" aria-hidden="true"></canvas>
+
+<script src="./static/js/thermal-background.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     // Initialize all videos with default speed of 2.5x (except supplementary video)
