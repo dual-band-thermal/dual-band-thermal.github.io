@@ -324,6 +324,49 @@
       margin-left: 1rem;
       vertical-align: middle;
     }
+
+    .results-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin: 0.2rem 0 1rem 0;
+    }
+
+    .results-speed-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      width: fit-content;
+      margin: 0 0 0 auto;
+      padding: 0.3rem 0.05rem 0.3rem 0.55rem;
+      border: 1px solid rgba(230, 235, 255, 0.75);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.32);
+      box-shadow: 0 4px 14px rgba(55, 82, 199, 0.05);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .results-speed-control label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #51639f;
+      white-space: nowrap;
+    }
+
+    .results-speed-control .speed-slider {
+      width: min(150px, 42vw);
+      margin-right: 0;
+      accent-color: #5f7aff;
+    }
+
+    .results-speed-control .speed-value {
+      min-width: 2.8em;
+      font-size: 0.82rem;
+      color: #51639f;
+    }
     
     .speed-control label {
       margin-right: 0.5rem;
@@ -383,7 +426,7 @@
 
     .results-intro {
       color: var(--text-secondary);
-      margin: 0.2rem 0 1.1rem 0;
+      margin: 0;
     }
 
     .selected-result-container .example-container {
@@ -718,6 +761,21 @@
       .speed-control {
         margin: 0.5rem 0 0 0;
       }
+
+      .results-speed-control {
+        margin-left: auto;
+        margin-right: 0;
+        padding: 0.38rem 0.55rem;
+      }
+
+      .results-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .results-speed-control {
+        margin-left: 0;
+      }
     }
   </style>
 </head>
@@ -849,9 +907,16 @@
 
     <div class="example-container results-panel" id="results-section">
       <h2 class="title is-3 section-title">Results</h2>
-      <p class="results-intro">
-        Select a scene thumbnail to view the corresponding decomposition videos and explanation.
-      </p>
+      <div class="results-meta">
+        <p class="results-intro">
+          Select a scene thumbnail to view the corresponding decomposition videos and explanation.
+        </p>
+        <div class="results-speed-control">
+          <label for="results-speed-slider">Playback Speed</label>
+          <input type="range" min="0.5" max="4" step="0.1" value="2.5" class="speed-slider" id="results-speed-slider">
+          <span class="speed-value" id="results-speed-value">2.5x</span>
+        </div>
+      </div>
       <div id="selected-result-container" class="selected-result-container"></div>
       <div class="thumbnail-band">
         <div class="thumbnail-band-title">Scene Thumbnails</div>
@@ -1350,6 +1415,37 @@
         });
       });
     });
+
+    const resultsSpeedSlider = document.getElementById('results-speed-slider');
+    const resultsSpeedValue = document.getElementById('results-speed-value');
+    const resultVideos = document.querySelectorAll('.result-item video');
+    const hiddenSpeedSliders = document.querySelectorAll('.result-item .speed-slider');
+    const hiddenSpeedValues = document.querySelectorAll('.result-item .speed-value');
+
+    const setResultsPlaybackSpeed = (speed) => {
+      resultVideos.forEach(video => {
+        video.playbackRate = speed;
+      });
+
+      hiddenSpeedSliders.forEach(slider => {
+        slider.value = String(speed);
+      });
+
+      hiddenSpeedValues.forEach(valueEl => {
+        valueEl.textContent = speed.toFixed(1) + 'x';
+      });
+
+      if (resultsSpeedValue) {
+        resultsSpeedValue.textContent = speed.toFixed(1) + 'x';
+      }
+    };
+
+    if (resultsSpeedSlider) {
+      setResultsPlaybackSpeed(parseFloat(resultsSpeedSlider.value));
+      resultsSpeedSlider.addEventListener('input', function() {
+        setResultsPlaybackSpeed(parseFloat(this.value));
+      });
+    }
 
     // Show one result scene at a time with clickable thumbnails.
     const resultItems = Array.from(document.querySelectorAll('.result-item'));
