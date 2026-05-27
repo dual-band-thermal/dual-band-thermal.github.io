@@ -1518,7 +1518,7 @@
     <div class="tldr" id="tldr-section">
       <p>
         <span class="tldr-label">TL;DR</span>
-        People assume thermal cameras measure temperature, they actually don't. They capture a mix of light emitted by an object and light reflected off its surface. We separate the two from dual-band thermal video by exploiting two facts: emissivity varies across the thermal spectrum, and emission (governed by heat transport) and reflections (governed by light transport) evolve on different timescales. This recovers true temperature in dynamic scenes like a coffee pot cooling on a desk.
+        People assume thermal cameras measure temperature — they actually don't. They capture a mix of light emitted by an object and light reflected off its surface. We separate the two from dual-band thermal video by exploiting two facts: emissivity varies across the thermal spectrum, and emission (governed by heat transport) and reflections (governed by light transport) evolve on different timescales. This recovers true temperature in dynamic scenes like a coffee pot cooling on a desk.
       </p>
     </div>
 
@@ -1557,7 +1557,7 @@
 
     <!-- Beat 4: How thermal images form -->
     <div class="story-section" id="image-formation-section">
-      <h2 class="title is-3 section-title">How thermal images form</h2>
+      <h2 class="title is-3 section-title">How a thermal image is formed</h2>
 
       <div class="story-split">
         <div class="story-split-copy">
@@ -1615,7 +1615,7 @@
             <h3 class="method-detail-title">Two equations, four unknowns</h3>
           </div>
           <p>Each pixel measurement is a weighted sum of the object's emission and the reflected background. With <strong>both bands</strong> we get two equations per pixel — but we now have <strong>four unknowns</strong>: the two band emissivities <em>ε<sub>1</sub>, ε<sub>2</sub></em>, the object temperature <em>T<sub>o</sub></em>, and the background temperature <em>T<sub>b</sub></em>.</p>
-          <p>If <em>ε</em> were known — the <strong>calibrated</strong> case — we can solve this system in closed form. The hard problem is the <strong>uncalibrated</strong> case, for which we propose the following two constraints based on the <strong> dynamic varitians in the background reflections</strong>.</p>
+          <p>If <em>ε</em> were known — the <strong>calibrated</strong> case — we can solve this system in closed form. The hard problem is the <strong>uncalibrated</strong> case, for which we propose the following two constraints based on the <strong> dynamic variations in the background reflections</strong>.</p>
         </div>
         <div class="method-detail-img">
           <img src="./misc_attachments/slide-14-image-formation-eqns.png" alt="Linearized dual-band image formation: I₁ and I₂ each equal ε·(a·T_o+b) + (1−ε)·(a·T_b+b)">
