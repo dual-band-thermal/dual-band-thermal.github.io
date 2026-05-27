@@ -150,6 +150,55 @@
       margin-bottom: 1rem;
     }
 
+    /* === Specular shine sweep effect (disabled). To re-enable,
+           uncomment this block and add the following three lines back
+           to .publication-venue-badge above:
+               position: relative;
+               overflow: hidden;
+               isolation: isolate;
+               box-shadow: 0 6px 20px rgba(77, 108, 255, 0.18);
+    .publication-venue-badge::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -40%;
+      width: 40%;
+      background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.85) 50%,
+        rgba(255, 255, 255, 0) 70%,
+        transparent 100%
+      );
+      transform: skewX(-18deg);
+      animation: badge-shine 3.6s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes badge-shine {
+      0%   { left: -40%; opacity: 0; }
+      8%   { opacity: 1; }
+      55%  { left: 130%; opacity: 1; }
+      60%  { opacity: 0; }
+      100% { left: 130%; opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .publication-venue-badge::before {
+        animation: none;
+        display: none;
+      }
+    }
+
+    .publication-venue-badge > * {
+      position: relative;
+      z-index: 2;
+    }
+    === end shine block === */
+
     .publication-venue-highlight {
       color: #d62828;
       font-size: 1em;
