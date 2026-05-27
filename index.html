@@ -667,10 +667,16 @@
       line-height: 1.6;
     }
 
-    .bibtex-code {
+    .bibtex-code-wrapper {
+      position: relative;
       margin-top: 0.8rem;
       margin-bottom: 0.3rem;
-      padding: 0.95rem;
+    }
+
+    .bibtex-code {
+      margin: 0;
+      padding: 0.95rem 0.95rem 0.95rem 0.95rem;
+      padding-right: 5.5rem;
       border-radius: 10px;
       border: 1px solid #dbe3ff;
       background: rgba(248, 250, 255, 0.82);
@@ -680,6 +686,39 @@
       line-height: 1.45;
       white-space: pre;
       overflow-x: auto;
+    }
+
+    .bibtex-copy-btn {
+      position: absolute;
+      top: 0.55rem;
+      right: 0.55rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-soft);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text-secondary);
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      z-index: 2;
+    }
+
+    .bibtex-copy-btn:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(77, 108, 255, 0.32);
+    }
+
+    .bibtex-copy-btn.is-copied {
+      background: rgba(43, 138, 78, 0.12);
+      color: #2b8a4e;
+      border-color: rgba(43, 138, 78, 0.3);
     }
     
     .footer {
@@ -804,7 +843,8 @@
       margin: 0;
     }
 
-    .story-split-figure img {
+    .story-split-figure img,
+    .story-split-figure video {
       display: block;
       width: 100%;
       height: auto;
@@ -985,7 +1025,8 @@
       background: #0f1220;
     }
 
-    .method-step-img img {
+    .method-step-img img,
+    .method-step-img video {
       display: block;
       width: 100%;
       height: auto;
@@ -1051,12 +1092,14 @@
 
     /* Even-numbered details: image on left, text on right */
     .method-detail[data-step="4"],
-    .method-detail[data-step="6"] {
+    .method-detail[data-step="6"],
+    .method-detail[data-step="8"] {
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     }
 
     .method-detail[data-step="4"] .method-detail-img,
-    .method-detail[data-step="6"] .method-detail-img {
+    .method-detail[data-step="6"] .method-detail-img,
+    .method-detail[data-step="8"] .method-detail-img {
       order: -1;
     }
 
@@ -1105,7 +1148,8 @@
       background: #0f1220;
     }
 
-    .method-detail-img img {
+    .method-detail-img img,
+    .method-detail-img video {
       display: block;
       width: 100%;
       height: auto;
@@ -1122,9 +1166,16 @@
       -webkit-backdrop-filter: blur(8px);
     }
 
-    .method-result-title {
-      text-align: center;
+    .method-result-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
       margin: 0 0 1rem 0;
+    }
+
+    .method-result-title {
+      margin: 0;
       font-size: 1.32rem;
       color: var(--accent);
     }
@@ -1137,7 +1188,8 @@
       background: #0f1220;
     }
 
-    .method-result-img img {
+    .method-result-img img,
+    .method-result-img video {
       display: block;
       width: 100%;
       height: auto;
@@ -1177,24 +1229,6 @@
       color: var(--text-primary);
     }
 
-    /* Takeaway — emphasized but not card-y */
-    .takeaway-panel {
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-      padding: 1.2rem 0 1.2rem 1.4rem;
-      border-left: 4px solid var(--accent);
-    }
-
-    .takeaway-panel p {
-      margin: 0;
-      color: var(--text-primary);
-      font-size: 1.15rem;
-      line-height: 1.65;
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
-    }
-
     @media screen and (max-width: 820px) {
       .story-row,
       .story-row.reverse {
@@ -1221,13 +1255,15 @@
 
       .method-detail,
       .method-detail[data-step="4"],
-      .method-detail[data-step="6"] {
+      .method-detail[data-step="6"],
+      .method-detail[data-step="8"] {
         grid-template-columns: 1fr;
         gap: 1.4rem;
       }
 
       .method-detail[data-step="4"] .method-detail-img,
-      .method-detail[data-step="6"] .method-detail-img {
+      .method-detail[data-step="6"] .method-detail-img,
+      .method-detail[data-step="8"] .method-detail-img {
         order: 0;
       }
     }
@@ -1433,7 +1469,7 @@
     <div class="tldr" id="tldr-section">
       <p>
         <span class="tldr-label">TL;DR</span>
-        Do thermal cameras measure temperature? They don't. They measure a mix of light emitted by an object and light reflected off its surface. We separate the two from dual-band thermal video by exploiting two facts: emissivity varies across the thermal spectrum, and emission (governed by heat transport) and reflections (governed by light transport) evolve on different timescales. This recovers true temperature in everyday dynamic scenes—like a coffee pot cooling on a desk.
+        People assume thermal cameras measure temperature, they actually don't. They capture a mix of light emitted by an object and light reflected off its surface. We separate the two from dual-band thermal video by exploiting two facts: emissivity varies across the thermal spectrum, and emission (governed by heat transport) and reflections (governed by light transport) evolve on different timescales. This recovers true temperature in dynamic scenes like a coffee pot cooling on a desk.
       </p>
     </div>
 
@@ -1481,7 +1517,9 @@
           <p>With one camera and one band, two unknowns — emissivity <em>ε</em> and background temperature <em>T<sub>b</sub></em> — make this impossible to solve. </p>
         </div>
         <figure class="story-split-figure">
-          <img src="./misc_attachments/thermal_image_formation.gif" alt="Animated diagram of thermal image formation: emitted light plus reflected light combine into the camera reading">
+          <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="Animated diagram of thermal image formation: emitted light plus reflected light combine into the camera reading">
+            <source src="./misc_attachments/thermal_image_formation.mp4" type="video/mp4">
+          </video>
         </figure>
       </div>
     </div>
@@ -1496,7 +1534,9 @@
           <span class="step-number">1</span>
           <h3 class="method-step-title">Emissivity varies with wavelength</h3>
           <div class="method-step-img">
-            <img src="./misc_attachments/wavelength_vs_emiss.gif" alt="Animated emissivity vs wavelength curves showing how different materials have different spectral emissivity profiles">
+            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="Animated emissivity vs wavelength curves showing how different materials have different spectral emissivity profiles">
+              <source src="./misc_attachments/wavelength_vs_emiss.mp4" type="video/mp4">
+            </video>
           </div>
           <figcaption>Different materials have different emissivity curves across the camera's range — so imaging in two bands gives <strong>two equations per pixel</strong>.</figcaption>
         </figure>
@@ -1505,7 +1545,9 @@
           <span class="step-number">2</span>
           <h3 class="method-step-title">Capture videos at two thermal bands</h3>
           <div class="method-step-img">
-            <img src="./misc_attachments/band_emissivity.gif" alt="Animated bandpass filter regions sweeping across the emissivity-vs-wavelength curve, integrating to give two band emissivities ε₁ and ε₂">
+            <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="Animated bandpass filter regions sweeping across the emissivity-vs-wavelength curve, integrating to give two band emissivities ε₁ and ε₂">
+              <source src="./misc_attachments/band_emissivity.mp4" type="video/mp4">
+            </video>
           </div>
           <figcaption>We capture videos at two spectral bands — full LWIR (8–14&nbsp;μm) and a narrow slice (9.25–9.75&nbsp;μm). Integrating spectral emissivity over each band gives band emissivities <em>ε<sub>1</sub></em> and <em>ε<sub>2</sub></em>.</figcaption>
         </figure>
@@ -1524,10 +1566,10 @@
             <h3 class="method-detail-title">Two equations, four unknowns</h3>
           </div>
           <p>Each pixel measurement is a weighted sum of the object's emission and the reflected background. With <strong>both bands</strong> we get two equations per pixel — but we now have <strong>four unknowns</strong>: the two band emissivities <em>ε<sub>1</sub>, ε<sub>2</sub></em>, the object temperature <em>T<sub>o</sub></em>, and the background temperature <em>T<sub>b</sub></em>.</p>
-          <p>If <em>ε</em> were known — the <strong>calibrated</strong> case — this system would close in closed form. The hard problem is the <strong>uncalibrated</strong> case, which the next two constraints solve.</p>
+          <p>If <em>ε</em> were known — the <strong>calibrated</strong> case — we can solve this system in closed form. The hard problem is the <strong>uncalibrated</strong> case, for which we propose the following two constraints based on the <strong> dynamic varitians in the background reflections</strong>.</p>
         </div>
         <div class="method-detail-img">
-          <img src="./static/slides/slide-14-image-formation-eqns.png" alt="Linearized dual-band image formation: I₁ and I₂ each equal ε·(a·T_o+b) + (1−ε)·(a·T_b+b)">
+          <img src="./misc_attachments/slide-14-image-formation-eqns.png" alt="Linearized dual-band image formation: I₁ and I₂ each equal ε·(a·T_o+b) + (1−ε)·(a·T_b+b)">
         </div>
       </figure>
 
@@ -1535,13 +1577,15 @@
         <div class="method-detail-text">
           <div class="method-detail-head">
             <span class="step-number step-number-inline">4</span>
-            <h3 class="method-detail-title">Static-background constraint &nbsp;(k<sub>1</sub>)</h3>
+            <h3 class="method-detail-title">A toy example to make this concrete</h3>
           </div>
-          <p>Most pixels in a scene have a background that doesn't change in time. At those pixels, <em>∂T<sub>b</sub>/∂t = 0</em>, so the temporal derivative of the signal is driven entirely by the object's emission.</p>
-          <p>Taking the ratio of <em>∂I/∂t</em> across the two bands cancels <em>T<sub>o</sub></em> and leaves an <strong>emissivity ratio k<sub>1</sub> = ε<sub>2</sub>/ε<sub>1</sub></strong> — computed purely from the temporal derivatives and known camera constants.</p>
+          <p>To describe our method for the uncalibrated case, we set up a synthetic scene: an object — a bunny heating up under a light source — and a separate video of a person walking as the <em>reflected background</em>.</p>
+          <p>For any choice of <em>ε</em>, the observed thermal video is a <strong>convex combination</strong> of the two: <em>I = ε·U(T<sub>o</sub>) + (1−ε)·U(T<sub>b</sub>)</em>. We'll use this scene to reason about what we can recover.</p>
         </div>
         <div class="method-detail-img">
-          <img src="./static/slides/slide-21-static-constraint.png" alt="At static-background pixels, the temporal derivative of the measured signal equals ε times the derivative of object temperature, visualized as image subtraction">
+          <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="Animated toy thermal scene composed of a bunny heating up (object emission) plus a person video as the reflected background, combined into a single observed thermal video">
+            <source src="./misc_attachments/toy_problem.mp4" type="video/mp4">
+          </video>
         </div>
       </figure>
 
@@ -1549,13 +1593,15 @@
         <div class="method-detail-text">
           <div class="method-detail-head">
             <span class="step-number step-number-inline">5</span>
-            <h3 class="method-detail-title">Dynamic-background constraint &nbsp;(k<sub>2</sub>)</h3>
+            <h3 class="method-detail-title">Reflections cause sparse, abrupt changes</h3>
           </div>
-          <p>At pixels where the background <em>does</em> change, we decompose the signal as <em>I(t) = Ĩ(t) + (1−ε)·a·T<sub>b</sub><sup>*</sup>(t)</em> — a <strong>smooth</strong> emission-driven term plus a fast-varying <strong>residual</strong> capturing the reflection changes.</p>
-          <p>The temporal derivative of the residual, ratioed across bands, gives a <strong>complementary constraint k<sub>2</sub> = (1−ε<sub>2</sub>)/(1−ε<sub>1</sub>)</strong>. Together with k<sub>1</sub>, this pins down both band emissivities.</p>
+          <p>Looking at one pixel's signal over time, the structure that makes the uncalibrated problem tractable becomes clear: most of the time the background is <strong>static</strong>, and reflection changes — when they happen — show up as <strong>abrupt, sparse</strong> jumps in the signal.</p>
+          <p>This is the property we exploit. The next two panels turn it into <strong>two complementary constraints</strong> on the band emissivities — one from static-background pixels, one from dynamic-background pixels.</p>
         </div>
         <div class="method-detail-img">
-          <img src="./static/slides/slide-24-dynamic-constraint.png" alt="At dynamic-background pixels, subtracting the smooth emission term leaves a residual driven only by reflection — visualized as image subtraction">
+          <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="Animated pixel time-series showing long static-background regions punctuated by abrupt, sparse jumps when the reflected background changes">
+            <source src="./misc_attachments/signal_static_dynamic.mp4" type="video/mp4">
+          </video>
         </div>
       </figure>
 
@@ -1563,23 +1609,77 @@
         <div class="method-detail-text">
           <div class="method-detail-head">
             <span class="step-number step-number-inline">6</span>
+            <h3 class="method-detail-title">Static-background constraint &nbsp;(k<sub>1</sub>)</h3>
+          </div>
+          <p>Most pixels in a scene have a background that doesn't change in time. At those pixels, <em>∂T<sub>b</sub>/∂t = 0</em>, so the temporal derivative of the signal is driven entirely by the object's emission.</p>
+          <p>Taking the ratio of <em>∂I/∂t</em> across the two bands cancels <em>T<sub>o</sub></em> and leaves an <strong>emissivity ratio k<sub>1</sub> = ε<sub>2</sub>/ε<sub>1</sub></strong> — computed purely from the temporal derivatives and known camera constants.</p>
+        </div>
+        <div class="method-detail-img">
+          <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="At static-background pixels, the temporal derivative of the measured signal equals ε times the derivative of object temperature, visualized as image subtraction">
+            <source src="./misc_attachments/static_constraint.mp4" type="video/mp4">
+          </video>
+        </div>
+      </figure>
+
+      <figure class="method-detail" data-step="7">
+        <div class="method-detail-text">
+          <div class="method-detail-head">
+            <span class="step-number step-number-inline">7</span>
+            <h3 class="method-detail-title">Dynamic-background constraint &nbsp;(k<sub>2</sub>)</h3>
+          </div>
+          <p>At pixels where the background <em>does</em> change, we decompose the signal as <em>I(t) = Ĩ(t) + (1−ε)·a·T<sub>b</sub><sup>*</sup>(t)</em> — a <strong>smooth</strong> emission-driven term plus a fast-varying <strong>residual</strong> capturing the reflection changes.</p>
+          <p>The temporal derivative of the residual, ratioed across bands, gives a <strong>complementary constraint k<sub>2</sub> = (1−ε<sub>2</sub>)/(1−ε<sub>1</sub>)</strong>. Together with k<sub>1</sub>, this pins down both band emissivities.</p>
+        </div>
+        <div class="method-detail-img">
+          <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="At dynamic-background pixels, subtracting the smooth emission term leaves a residual driven only by reflection — visualized as image subtraction">
+            <source src="./misc_attachments/dynamic_constraint.mp4" type="video/mp4">
+          </video>
+        </div>
+      </figure>
+
+      <figure class="method-detail" data-step="8">
+        <div class="method-detail-text">
+          <div class="method-detail-head">
+            <span class="step-number step-number-inline">8</span>
+            <h3 class="method-detail-title">Recovering ε<sub>1</sub> and ε<sub>2</sub></h3>
+          </div>
+          <p>The two constraints — <strong>k<sub>1</sub> = ε<sub>2</sub>/ε<sub>1</sub></strong> and <strong>k<sub>2</sub> = (1−ε<sub>2</sub>)/(1−ε<sub>1</sub>)</strong> — are two equations in two unknowns. Inverting them gives the per-pixel band emissivities:</p>
+          <p><strong>ε<sub>1</sub> = (k<sub>2</sub>−1)/(k<sub>2</sub>−k<sub>1</sub>)</strong> &nbsp; and &nbsp; <strong>ε<sub>2</sub> = k<sub>1</sub>·(k<sub>2</sub>−1)/(k<sub>2</sub>−k<sub>1</sub>)</strong>.</p>
+          <p>With <em>ε</em> known purely from the spatio-temporal structure of the background, the temperatures <em>T<sub>o</sub></em> and <em>T<sub>b</sub></em> fall out of the original two-band equations — just like the calibrated case.</p>
+        </div>
+        <div class="method-detail-img">
+          <img src="./misc_attachments/slide-26-emissivity-recovery.png" alt="Combining k₁ and k₂: two equations in two unknowns invert to give per-pixel emissivities ε₁ and ε₂, visualized as colored bunny emissivity maps">
+        </div>
+      </figure>
+
+      <figure class="method-detail" data-step="9">
+        <div class="method-detail-text">
+          <div class="method-detail-head">
+            <span class="step-number step-number-inline">9</span>
             <h3 class="method-detail-title">Joint optimization</h3>
           </div>
           <p>The smooth emission signal <em>Ĩ(t)</em> isn't known a priori — it has to be estimated. We pose this as a joint optimization that recovers <em>ε<sub>1</sub>, ε<sub>2</sub>, T<sub>o</sub>, T<sub>b</sub></em>, and the smooth signal together.</p>
           <p>The objective combines a <strong>smoothness</strong> loss (second-derivative regularizer), a <strong>Huber</strong> loss (data fidelity without over-flattening), and an <strong>MSE</strong> reconstruction loss. The ablation table shows each term meaningfully reduces error.</p>
         </div>
         <div class="method-detail-img">
-          <img src="./static/slides/slide-29-optimization.png" alt="Optimization framework with smoothness, Huber, MSE, and noise loss terms, plus an ablation table showing percent error reduction from each loss">
+          <video controls autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="Optimization framework with smoothness, Huber, MSE, and noise loss terms, plus an ablation table showing percent error reduction from each loss">
+            <source src="./misc_attachments/loss_optimization.mp4" type="video/mp4">
+          </video>
         </div>
       </figure>
 
       <!-- Big result panel — payoff before the Results carousel -->
       <figure class="method-result">
-        <h3 class="method-step-title method-result-title">Reflection–Emission Separation</h3>
-        <div class="method-result-img">
-          <img src="./static/slides/slide-30-result-coffeepot.png" alt="Coffee pot scene decomposed into reflected light and emitted light by our method">
+        <div class="method-result-head">
+          <span class="step-number step-number-inline">10</span>
+          <h3 class="method-step-title method-result-title">Optimization Result</h3>
         </div>
-        <figcaption>Coffee pot heating up while a person moves behind it. Our optimization separates the thermal video into <strong>reflected light</strong> (light transport) and <strong>emitted light</strong> (heat transport). Validated against contact thermocouple readings: <strong>5.34% average object-temperature error.</strong></figcaption>
+        <div class="method-result-img">
+          <video autoplay muted loop playsinline disablepictureinpicture preload="metadata" aria-label="Glass plate heated by a small heat gun, decomposed by our optimization into reflected light and emission visualized as iso-contour lines">
+            <source src="./misc_attachments/reflection_separation_result.mp4" type="video/mp4">
+          </video>
+        </div>
+        <figcaption>A glass plate in front of the camera is heated by a small heat gun. Here the <strong>reflections</strong> are much clearer than the emission, which is very subtle. Our optimization recovers the <strong>reflected light</strong> from the surrounding scene, and the <strong>iso-contour lines</strong> reveal the emission from the hot air gun heating the plate.</figcaption>
       </figure>
     </div>
 
@@ -2050,22 +2150,23 @@
       </div>
     </div>
 
-    <!-- Beat 7: Takeaway -->
-    <div class="takeaway-panel" id="takeaway-section">
-      <h2 class="title is-4 section-title">Takeaway</h2>
-      <p>
-        Thermal cameras don't measure temperature — they measure a mix of emitted and reflected light. Two bands plus the spatio-temporal structure of reflections separate them, enabling thermography in everyday dynamic scenes.
-      </p>
-    </div>
-
     <div class="bibtex-panel" id="bibtex-section">
       <h2 class="title is-4 section-title">BibTeX</h2>
-      <pre class="bibtex-code">@inproceedings{narayanan2026dual,
-  title     = {Dual Band Thermal Videography: Separating Time-Varying Reflection and Emission Near Ambient Conditions},
-  author    = {Narayanan, Sriram and Ramanagopal, Mani and Narasimhan, Srinivasa},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year      = {2026}
+      <div class="bibtex-code-wrapper">
+        <button type="button" class="bibtex-copy-btn" id="bibtex-copy-btn" aria-label="Copy BibTeX citation to clipboard">
+          <i class="fas fa-copy" aria-hidden="true"></i>
+          <span class="bibtex-copy-label">Copy</span>
+        </button>
+        <pre class="bibtex-code" id="bibtex-code">@InProceedings{Narayanan_2026_CVPR,
+        author    = {Narayanan, Sriram and Ramanagopal, Mani and Narasimhan, Srinivasa},
+        title     = {Dual Band Thermal Videography: Separating Time-Varying Reflection and Emission Near Ambient Conditions},
+        booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+        month     = {June},
+        year      = {2026},
+        pages     = {199-208}
+    }
 }</pre>
+      </div>
     </div>
 
     <div class="acknowledgement-panel" id="acknowledgements-section">
@@ -2082,12 +2183,13 @@
 <script src="./static/js/thermal-background.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all videos with default speed of 2.5x (except supplementary video)
+    // Default playback rate for non-result videos.
+    // The result-carousel videos are managed separately by the results speed slider.
     const allVideos = document.querySelectorAll('video');
     allVideos.forEach(video => {
-      if (video.id !== 'supp-video') {
-        video.playbackRate = 2.5;
-      }
+      if (video.id === 'supp-video') return;
+      if (video.closest('.result-item')) return;
+      video.playbackRate = 1.5;
     });
     
     // Set up speed control sliders for each example
@@ -2258,6 +2360,42 @@
       }
 
       showResult(currentIndex);
+    }
+
+    // Copy BibTeX to clipboard
+    const bibtexCopyBtn = document.getElementById('bibtex-copy-btn');
+    const bibtexCode = document.getElementById('bibtex-code');
+    if (bibtexCopyBtn && bibtexCode) {
+      const labelEl = bibtexCopyBtn.querySelector('.bibtex-copy-label');
+      const iconEl = bibtexCopyBtn.querySelector('i');
+      let resetTimer = null;
+
+      bibtexCopyBtn.addEventListener('click', async () => {
+        const text = bibtexCode.textContent;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch (err) {
+          // Fallback for older browsers / insecure contexts
+          const range = document.createRange();
+          range.selectNodeContents(bibtexCode);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          try { document.execCommand('copy'); } catch (e) {}
+          sel.removeAllRanges();
+        }
+
+        if (labelEl) labelEl.textContent = 'Copied!';
+        if (iconEl) iconEl.className = 'fas fa-check';
+        bibtexCopyBtn.classList.add('is-copied');
+
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(() => {
+          if (labelEl) labelEl.textContent = 'Copy';
+          if (iconEl) iconEl.className = 'fas fa-copy';
+          bibtexCopyBtn.classList.remove('is-copied');
+        }, 1800);
+      });
     }
   });
 </script>
