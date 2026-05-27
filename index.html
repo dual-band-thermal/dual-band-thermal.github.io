@@ -139,13 +139,13 @@
     .publication-venue-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      padding: 0.35rem 0.8rem;
+      gap: 0.55rem;
+      padding: 0.5rem 1.15rem;
       border-radius: 999px;
       border: 1px solid var(--border-soft);
       background: var(--accent-soft);
       color: var(--accent);
-      font-size: 1.15rem;
+      font-size: 1.42rem;
       font-weight: 600;
       margin-bottom: 1rem;
     }
@@ -155,6 +155,13 @@
       font-size: 1em;
       font-weight: 700;
       letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .publication-venue-highlight .fa-trophy {
+      color: #d4a017;
     }
 
     .hero {
@@ -174,7 +181,7 @@
     .container.is-fluid {
       max-width: 1440px;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 clamp(1.25rem, 6vw, 5rem);
     }
 
     .publication-links {
@@ -745,6 +752,72 @@
       border-radius: 8px;
     }
 
+    /* Standalone centered figure — image breathes on its own */
+    .story-figure {
+      margin: 1.6rem auto;
+      max-width: 1100px;
+      text-align: center;
+    }
+
+    .story-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .story-figure figcaption {
+      margin-top: 0.7rem;
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* Tight side-by-side: narrower text column + smaller fixed-width image */
+    .story-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+      gap: 2.6rem;
+      align-items: center;
+      margin: 0.6rem 0;
+    }
+
+    .story-split-copy p {
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin: 0 0 0.9rem 0;
+      font-size: 1.04rem;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+
+    .story-split-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-split-copy strong {
+      color: var(--text-primary);
+    }
+
+    .story-split-figure {
+      margin: 0;
+    }
+
+    .story-split-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    @media screen and (max-width: 900px) {
+      .story-split {
+        grid-template-columns: 1fr;
+        gap: 1.3rem;
+      }
+    }
+
     /* Hook section — extra emphasis */
     .story-hook .story-copy p {
       font-size: 1.22rem;
@@ -758,7 +831,9 @@
       font-size: 1.08rem;
       line-height: 1.65;
       margin: 0.4rem 0 1.4rem 0;
-      max-width: 1100px;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
     }
 
     .story-closer {
@@ -766,7 +841,9 @@
       font-size: 1.05rem;
       line-height: 1.7;
       margin: 1.6rem 0 0 0;
-      max-width: 1100px;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
     }
 
     .story-closer strong {
@@ -856,33 +933,227 @@
       margin: 0 0 0.8rem 0;
     }
 
-    /* Two-cue side-by-side block */
-    .two-cue-grid {
+    /* ===== Method section: 2-up intro + stacked full-width details ===== */
+    .method-intro {
+      position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin: 0.4rem 0 1.2rem 0;
+      gap: 5rem;
+      margin: 1.5rem 0 3.5rem 0;
     }
 
-    .cue-card {
-      padding: 0.2rem 0 0.2rem 1rem;
-      border-left: 3px solid var(--accent);
-    }
-
-    .cue-card-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 0.35rem;
-    }
-
-    .cue-card p {
+    .method-step {
       margin: 0;
+      position: relative;
+      padding: 1.4rem 1.3rem 1.2rem 1.3rem;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .step-number {
+      position: absolute;
+      top: -18px;
+      left: 1.2rem;
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #4d6cff 0%, #8a57ff 100%);
+      color: #fff;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      box-shadow: 0 6px 18px rgba(77, 108, 255, 0.35);
+    }
+
+    .method-step-title {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.12rem;
+      color: #2c3f80;
+      margin: 0.4rem 0 0.9rem 0;
+    }
+
+    .method-step-img {
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0f1220;
+    }
+
+    .method-step-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .method-step figcaption {
+      margin-top: 0.85rem;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .method-step figcaption strong {
+      color: var(--text-primary);
+    }
+
+    .cue-inline {
+      display: block;
+      margin-top: 0.35rem;
+    }
+
+    .cue-inline:first-child {
+      margin-top: 0;
+    }
+
+    .cue-inline b {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Arrows overlaid on the grid */
+    .method-arrow {
+      position: absolute;
+      color: var(--accent);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Single arrow between intro panels 1 and 2 */
+    .arrow-intro-12 {
+      width: 3rem;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* ===== Detail panels (3–6): full-width, image+text split, alternating sides ===== */
+    .method-detail {
+      margin: 0 0 3rem 0;
+      padding: 1.6rem 1.8rem 1.4rem 1.8rem;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    /* Even-numbered details: image on left, text on right */
+    .method-detail[data-step="4"],
+    .method-detail[data-step="6"] {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    }
+
+    .method-detail[data-step="4"] .method-detail-img,
+    .method-detail[data-step="6"] .method-detail-img {
+      order: -1;
+    }
+
+    .method-detail-head {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .step-number-inline {
+      position: static;
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .method-detail-title {
+      font-family: 'Google Sans', 'Noto Sans', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #2c3f80;
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    .method-detail-text p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0 0 0.8rem 0;
+      font-size: 1.02rem;
+    }
+
+    .method-detail-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .method-detail-text strong {
+      color: var(--text-primary);
+    }
+
+    .method-detail-img {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0f1220;
+    }
+
+    .method-detail-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Big result panel below the grid */
+    .method-result {
+      margin: 3rem 0 0 0;
+      padding: 1.6rem 1.6rem 1.4rem 1.6rem;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .method-result-title {
+      text-align: center;
+      margin: 0 0 1rem 0;
+      font-size: 1.32rem;
+      color: var(--accent);
+    }
+
+    .method-result-img {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0f1220;
+    }
+
+    .method-result-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .method-result figcaption {
+      max-width: 1100px;
+      margin: 1rem auto 0 auto;
       color: var(--text-secondary);
       font-size: 1rem;
-      line-height: 1.6;
+      line-height: 1.65;
+      text-align: center;
+    }
+
+    .method-result figcaption strong {
+      color: var(--text-primary);
     }
 
     /* Verification callout — keep small inline pill, no card */
@@ -919,8 +1190,9 @@
       color: var(--text-primary);
       font-size: 1.15rem;
       line-height: 1.65;
-      text-wrap: balance;
-      max-width: 1100px;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
     }
 
     @media screen and (max-width: 820px) {
@@ -934,13 +1206,29 @@
         order: 0;
       }
 
-      .two-cue-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-
       .story-hook .story-copy p {
         font-size: 1.08rem;
+      }
+
+      .method-intro {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+      }
+
+      .method-arrow {
+        display: none;
+      }
+
+      .method-detail,
+      .method-detail[data-step="4"],
+      .method-detail[data-step="6"] {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+      }
+
+      .method-detail[data-step="4"] .method-detail-img,
+      .method-detail[data-step="6"] .method-detail-img {
+        order: 0;
       }
     }
 
@@ -1061,9 +1349,11 @@
             <img src="./static/images/CMU.png" alt="Carnegie Mellon University" class="publication-affiliation-logo">
           </p>
           <div class="publication-venue-badge">
-            <!-- <i class="fas fa-award"></i> -->
             <span>CVPR 2026</span>
-            <span class="publication-venue-highlight">(Oral)</span>
+            <span class="publication-venue-highlight">
+              Oral, Award Candidate
+              <i class="fas fa-trophy" aria-hidden="true"></i>
+            </span>
           </div>
           
           <div class="column has-text-centered">
@@ -1178,23 +1468,21 @@
         </figure>
       </div>
 
-      <p class="story-closer">Every thermal pixel mixes two things: light <strong>emitted</strong> by the object, and light <strong>reflected</strong> off its surface. Untangling them is what this paper is about.</p>
     </div>
 
     <!-- Beat 4: How thermal images form -->
     <div class="story-section" id="image-formation-section">
       <h2 class="title is-3 section-title">How thermal images form</h2>
-      <div class="story-row">
-        <div class="story-copy">
-          <p>A thermal camera measures <code>I = ε · U(T<sub>o</sub>) + (1 − ε) · U(T<sub>b</sub>)</code> — a weighted sum of the object's own emission and reflected ambient light.</p>
-          <p>With one camera and one band, two unknowns (emissivity <em>ε</em> and background temperature <em>T<sub>b</sub></em>) make this impossible to solve. Existing methods only work in extreme cases: very hot objects, or near-mirror surfaces.</p>
-          <p><strong>Everyday scenes near room temperature fall right in the middle.</strong></p>
+
+      <div class="story-split">
+        <div class="story-split-copy">
+          <p>A thermal camera doesn't see temperature directly. Each pixel is a weighted sum of light <strong>emitted</strong> by the object — governed by its temperature and how emissive the material is — and light <strong>reflected</strong> off its surface from the ambient environment.</p>
+          <p>Ignoring either reflection or emission is not possible for most common objects in everyday scenes.</p>
+          <p>With one camera and one band, two unknowns — emissivity <em>ε</em> and background temperature <em>T<sub>b</sub></em> — make this impossible to solve. </p>
         </div>
-        <div>
-          <div class="story-visual">
-            <img src="./static/slides/slide-05-image-formation.png" alt="Thermal image formation equation and LWIR camera diagram showing emitted and reflected light">
-          </div>
-        </div>
+        <figure class="story-split-figure">
+          <img src="./misc_attachments/thermal_image_formation.gif" alt="Animated diagram of thermal image formation: emitted light plus reflected light combine into the camera reading">
+        </figure>
       </div>
     </div>
 
@@ -1202,57 +1490,97 @@
     <div class="story-section" id="method-section">
       <h2 class="title is-3 section-title">Dual Band Thermal Videography</h2>
 
-      <div class="story-substep">
-        <h3>1. Emissivity depends on wavelength</h3>
-        <div class="story-row reverse">
-          <div class="story-copy">
-            <p>Different materials have different emissivity curves across the thermal spectrum. If we image in <strong>two</strong> bands, we get <strong>two</strong> equations per pixel — one extra constraint to play with.</p>
+      <!-- Intro: panels 1 & 2 side-by-side (small concept cards) -->
+      <div class="method-intro">
+        <figure class="method-step" data-step="1">
+          <span class="step-number">1</span>
+          <h3 class="method-step-title">Emissivity varies with wavelength</h3>
+          <div class="method-step-img">
+            <img src="./misc_attachments/wavelength_vs_emiss.gif" alt="Animated emissivity vs wavelength curves showing how different materials have different spectral emissivity profiles">
           </div>
-          <div>
-            <div class="story-visual">
-              <img src="./static/slides/slide-11-emissivity-wavelength.png" alt="Emissivity vs wavelength curves for steel and quartz across 8 to 14 microns">
-            </div>
+          <figcaption>Different materials have different emissivity curves across the camera's range — so imaging in two bands gives <strong>two equations per pixel</strong>.</figcaption>
+        </figure>
+
+        <figure class="method-step" data-step="2">
+          <span class="step-number">2</span>
+          <h3 class="method-step-title">Capture videos at two thermal bands</h3>
+          <div class="method-step-img">
+            <img src="./misc_attachments/band_emissivity.gif" alt="Animated bandpass filter regions sweeping across the emissivity-vs-wavelength curve, integrating to give two band emissivities ε₁ and ε₂">
           </div>
-        </div>
+          <figcaption>We capture videos at two spectral bands — full LWIR (8–14&nbsp;μm) and a narrow slice (9.25–9.75&nbsp;μm). Integrating spectral emissivity over each band gives band emissivities <em>ε<sub>1</sub></em> and <em>ε<sub>2</sub></em>.</figcaption>
+        </figure>
+
+        <svg class="method-arrow arrow-intro-12" viewBox="0 0 40 20" aria-hidden="true">
+          <defs><marker id="arr-i1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+          <path d="M2,10 L36,10" stroke="currentColor" stroke-width="2.2" fill="none" marker-end="url(#arr-i1)"/>
+        </svg>
       </div>
 
-      <div class="story-substep">
-        <h3>2. Two thermal bands</h3>
-        <div class="story-row">
-          <div class="story-copy">
-            <p>We capture two co-located thermal videos: the full LWIR band (8–14&nbsp;μm) and a narrow filtered band (9.25–9.75&nbsp;μm). Each pixel now gives a pair of measurements with different band emissivities <em>ε<sub>1</sub></em> and <em>ε<sub>2</sub></em>.</p>
+      <!-- Detail panels: 3, 4, 5, 6 — each full-width, alternating image side -->
+      <figure class="method-detail" data-step="3">
+        <div class="method-detail-text">
+          <div class="method-detail-head">
+            <span class="step-number step-number-inline">3</span>
+            <h3 class="method-detail-title">Two equations, four unknowns</h3>
           </div>
-          <div>
-            <div class="story-visual">
-              <img src="./static/slides/slide-12-dual-band-hardware.png" alt="Dual band thermography setup with two equations and the bandpass filter regions on the emissivity curve">
-            </div>
-          </div>
+          <p>Each pixel measurement is a weighted sum of the object's emission and the reflected background. With <strong>both bands</strong> we get two equations per pixel — but we now have <strong>four unknowns</strong>: the two band emissivities <em>ε<sub>1</sub>, ε<sub>2</sub></em>, the object temperature <em>T<sub>o</sub></em>, and the background temperature <em>T<sub>b</sub></em>.</p>
+          <p>If <em>ε</em> were known — the <strong>calibrated</strong> case — this system would close in closed form. The hard problem is the <strong>uncalibrated</strong> case, which the next two constraints solve.</p>
         </div>
-      </div>
+        <div class="method-detail-img">
+          <img src="./static/slides/slide-14-image-formation-eqns.png" alt="Linearized dual-band image formation: I₁ and I₂ each equal ε·(a·T_o+b) + (1−ε)·(a·T_b+b)">
+        </div>
+      </figure>
 
-      <div class="story-substep">
-        <h3>3. Two cues solve it</h3>
-        <div class="two-cue-grid">
-          <div class="cue-card">
-            <div class="cue-card-label">Spectrum cue</div>
-            <p>Two bands give two equations per pixel, exploiting the fact that emissivity varies across wavelengths.</p>
+      <figure class="method-detail" data-step="4">
+        <div class="method-detail-text">
+          <div class="method-detail-head">
+            <span class="step-number step-number-inline">4</span>
+            <h3 class="method-detail-title">Static-background constraint &nbsp;(k<sub>1</sub>)</h3>
           </div>
-          <div class="cue-card">
-            <div class="cue-card-label">Time cue</div>
-            <p>Heat flows slowly, so emission changes smoothly. Reflections change abruptly and sparsely — they stand out in the temporal derivative.</p>
-          </div>
+          <p>Most pixels in a scene have a background that doesn't change in time. At those pixels, <em>∂T<sub>b</sub>/∂t = 0</em>, so the temporal derivative of the signal is driven entirely by the object's emission.</p>
+          <p>Taking the ratio of <em>∂I/∂t</em> across the two bands cancels <em>T<sub>o</sub></em> and leaves an <strong>emissivity ratio k<sub>1</sub> = ε<sub>2</sub>/ε<sub>1</sub></strong> — computed purely from the temporal derivatives and known camera constants.</p>
         </div>
-        <div class="story-row reverse">
-          <div class="story-copy">
-            <p>The temporal structure tells us <em>where</em> reflections happen; the smooth residual is the object's emission. Together, the two cues pull emission and reflection apart — <strong>even when they're comparable in magnitude.</strong></p>
-          </div>
-          <div>
-            <div class="story-visual">
-              <img src="./static/slides/slide-19-pixel-trace.png" alt="Pixel time-series from a real video showing static background regions and abrupt dynamic-background transitions">
-            </div>
-          </div>
+        <div class="method-detail-img">
+          <img src="./static/slides/slide-21-static-constraint.png" alt="At static-background pixels, the temporal derivative of the measured signal equals ε times the derivative of object temperature, visualized as image subtraction">
         </div>
-      </div>
+      </figure>
+
+      <figure class="method-detail" data-step="5">
+        <div class="method-detail-text">
+          <div class="method-detail-head">
+            <span class="step-number step-number-inline">5</span>
+            <h3 class="method-detail-title">Dynamic-background constraint &nbsp;(k<sub>2</sub>)</h3>
+          </div>
+          <p>At pixels where the background <em>does</em> change, we decompose the signal as <em>I(t) = Ĩ(t) + (1−ε)·a·T<sub>b</sub><sup>*</sup>(t)</em> — a <strong>smooth</strong> emission-driven term plus a fast-varying <strong>residual</strong> capturing the reflection changes.</p>
+          <p>The temporal derivative of the residual, ratioed across bands, gives a <strong>complementary constraint k<sub>2</sub> = (1−ε<sub>2</sub>)/(1−ε<sub>1</sub>)</strong>. Together with k<sub>1</sub>, this pins down both band emissivities.</p>
+        </div>
+        <div class="method-detail-img">
+          <img src="./static/slides/slide-24-dynamic-constraint.png" alt="At dynamic-background pixels, subtracting the smooth emission term leaves a residual driven only by reflection — visualized as image subtraction">
+        </div>
+      </figure>
+
+      <figure class="method-detail" data-step="6">
+        <div class="method-detail-text">
+          <div class="method-detail-head">
+            <span class="step-number step-number-inline">6</span>
+            <h3 class="method-detail-title">Joint optimization</h3>
+          </div>
+          <p>The smooth emission signal <em>Ĩ(t)</em> isn't known a priori — it has to be estimated. We pose this as a joint optimization that recovers <em>ε<sub>1</sub>, ε<sub>2</sub>, T<sub>o</sub>, T<sub>b</sub></em>, and the smooth signal together.</p>
+          <p>The objective combines a <strong>smoothness</strong> loss (second-derivative regularizer), a <strong>Huber</strong> loss (data fidelity without over-flattening), and an <strong>MSE</strong> reconstruction loss. The ablation table shows each term meaningfully reduces error.</p>
+        </div>
+        <div class="method-detail-img">
+          <img src="./static/slides/slide-29-optimization.png" alt="Optimization framework with smoothness, Huber, MSE, and noise loss terms, plus an ablation table showing percent error reduction from each loss">
+        </div>
+      </figure>
+
+      <!-- Big result panel — payoff before the Results carousel -->
+      <figure class="method-result">
+        <h3 class="method-step-title method-result-title">Reflection–Emission Separation</h3>
+        <div class="method-result-img">
+          <img src="./static/slides/slide-30-result-coffeepot.png" alt="Coffee pot scene decomposed into reflected light and emitted light by our method">
+        </div>
+        <figcaption>Coffee pot heating up while a person moves behind it. Our optimization separates the thermal video into <strong>reflected light</strong> (light transport) and <strong>emitted light</strong> (heat transport). Validated against contact thermocouple readings: <strong>5.34% average object-temperature error.</strong></figcaption>
+      </figure>
     </div>
 
     <div class="story-section" id="video-section">
@@ -1294,10 +1622,6 @@
           <button id="results-next" class="result-nav-btn" aria-label="Next result">&rsaquo;</button>
         </div>
         <div id="result-dots" class="result-dots"></div>
-      </div>
-      <div class="verification-callout">
-        <span class="icon"><i class="fas fa-check-circle"></i></span>
-        <span>Validated against contact thermocouple readings: <strong>5.34% average object-temperature error.</strong></span>
       </div>
     </div>
     <div id="results-storage" style="display: none;"></div>
