@@ -2228,7 +2228,11 @@
     const hiddenSpeedSliders = document.querySelectorAll('.result-item .speed-slider');
     const hiddenSpeedValues = document.querySelectorAll('.result-item .speed-value');
 
+    // Shared state so play handlers and DOM-moves can re-apply the current rate.
+    window.currentResultsSpeed = parseFloat(resultsSpeedSlider ? resultsSpeedSlider.value : '2.5');
+
     const setResultsPlaybackSpeed = (speed) => {
+      window.currentResultsSpeed = speed;
       resultVideos.forEach(video => {
         video.playbackRate = speed;
       });
@@ -2245,6 +2249,21 @@
         resultsSpeedValue.textContent = speed.toFixed(1) + 'x';
       }
     };
+
+    // Re-apply rate on play/loadeddata — browsers can reset playbackRate after
+    // the element is moved between parents or after autoplay starts.
+    resultVideos.forEach(video => {
+      const reapply = () => { video.playbackRate = window.currentResultsSpeed; };
+      video.addEventListener('play', reapply);
+      video.addEventListener('loadeddata', reapply);
+      video.addEventListener('ratechange', () => {
+        // If something external (e.g. browser controls) reset it to 1, snap back.
+        if (Math.abs(video.playbackRate - window.currentResultsSpeed) > 0.01
+            && Math.abs(video.playbackRate - 1.0) < 0.01) {
+          video.playbackRate = window.currentResultsSpeed;
+        }
+      });
+    });
 
     if (resultsSpeedSlider) {
       setResultsPlaybackSpeed(parseFloat(resultsSpeedSlider.value));
@@ -2277,6 +2296,11 @@
         resultItems.forEach((item, itemIndex) => {
           if (itemIndex === currentIndex) {
             selectedContainer.appendChild(item);
+            // Re-apply the current playback rate after the move; some browsers
+            // reset playbackRate when a media element is appended to a new parent.
+            item.querySelectorAll('video').forEach(v => {
+              v.playbackRate = window.currentResultsSpeed || 2.5;
+            });
           } else {
             storageContainer.appendChild(item);
           }
