@@ -1328,88 +1328,215 @@
       }
     }
     
-    /* Fix for mobile */
+    /* ===== Mobile (≤768px) — tighten everything for phones/small tablets ===== */
     @media screen and (max-width: 768px) {
-      .hero {
-        padding-top: 2.4rem;
-      }
+      /* Hero */
+      .hero { padding: 1.6rem 0 0.4rem 0; }
 
       .publication-title {
-        font-size: clamp(1.7rem, 9vw, 2.2rem) !important;
-        line-height: 1.15;
+        font-size: clamp(1.6rem, 8.5vw, 2.05rem) !important;
+        line-height: 1.18;
       }
 
       .publication-authors {
-        font-size: 1.08rem;
-        margin-top: 1rem;
-        line-height: 1.6;
+        font-size: 1rem;
+        margin-top: 0.85rem;
+        line-height: 1.55;
       }
 
       .publication-affiliation {
-        font-size: 1.0rem;
-        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.9rem;
       }
 
-      .result-carousel-nav {
-        grid-template-columns: 36px 1fr 36px;
+      .publication-venue-badge {
+        font-size: 1.05rem;
+        padding: 0.32rem 0.85rem;
+      }
+
+      .publication-links {
         gap: 0.4rem;
       }
 
-      .result-nav-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1.05rem;
+      .publication-links .button {
+        font-size: 0.82rem;
+        padding: 0.4rem 0.7rem;
+        height: auto;
       }
 
-      .result-thumbnails {
-        gap: 0.5rem;
+      /* Section title scaling — override Bulma's defaults that are too big */
+      .section-title.title.is-3 { font-size: 1.32rem !important; }
+      .section-title.title.is-4 { font-size: 1.08rem !important; }
+
+      .section { padding: 1rem 0; }
+
+      /* TL;DR — justify looks bad at narrow widths */
+      .tldr {
+        margin-bottom: 1.6rem;
+      }
+      .tldr p {
+        text-align: left;
+        font-size: 1.04rem;
+        line-height: 1.55;
+        hyphens: none;
+      }
+      .tldr-label {
+        font-size: 0.74rem;
+        padding: 0.18rem 0.55rem;
+        margin-right: 0.55rem;
       }
 
-      .result-thumb {
-        width: 136px;
-        padding: 0.42rem 0.34rem;
+      /* Failure-grid videos: portrait 9:16 gets huge — cap height */
+      .failure-grid {
+        max-width: 100%;
+      }
+      .failure-video {
+        max-height: 60vh;
+      }
+      .failure-item figcaption { font-size: 0.92rem; line-height: 1.5; }
+      .failure-label { font-size: 0.72rem; margin-bottom: 0.3rem; }
+      .story-lead { font-size: 0.98rem; margin-bottom: 1rem; }
+      .story-closer { font-size: 0.97rem; }
+
+      /* Method intro cards — tighten padding & type */
+      .method-intro { gap: 1.4rem; margin-bottom: 1.6rem; }
+      .method-step { padding: 0.95rem 0.95rem 0.85rem 0.95rem; }
+      .method-step-title { font-size: 0.98rem; margin: 0.4rem 0 0.6rem 0; }
+      .method-step figcaption { font-size: 0.9rem; line-height: 1.5; }
+      .step-number {
+        width: 30px; height: 30px;
+        font-size: 0.88rem;
+        top: -14px; left: 0.85rem;
       }
 
-      .thumb-image {
-        height: 70px;
-        font-size: 0.72rem;
+      /* Method detail panels (stacked rows) */
+      .method-detail {
+        padding: 0.95rem 1rem 0.85rem 1rem;
+        border-radius: 12px;
+        margin-bottom: 1.6rem;
+      }
+      .method-detail-title { font-size: 1.02rem; line-height: 1.25; }
+      .method-detail-head { gap: 0.55rem; margin-bottom: 0.65rem; }
+      .step-number-inline {
+        width: 28px; height: 28px; font-size: 0.85rem;
+      }
+      .method-detail-text p {
+        font-size: 0.93rem; line-height: 1.55;
+        margin-bottom: 0.55rem;
       }
 
-      .result-thumb .thumb-label {
-        font-size: 0.75rem;
+      /* Big result panel */
+      .method-result {
+        padding: 1rem; margin-top: 1.8rem;
       }
+      .method-result-head { gap: 0.55rem; margin-bottom: 0.6rem; }
+      .method-result-title { font-size: 1.05rem; }
+      .method-result figcaption { font-size: 0.92rem; line-height: 1.55; }
 
-      .columns.is-mobile {
-        display: block;
-      }
-      
-      .column.is-3 {
-        width: 100%;
-      }
-      
-      .example-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .speed-control {
-        margin: 0.5rem 0 0 0;
-      }
+      /* Story-figure & story-split fallback widths */
+      .story-figure { margin: 1.1rem auto; }
+      .story-split { margin: 0.4rem 0; }
+      .story-split-copy p { font-size: 0.96rem; line-height: 1.6; }
 
-      .results-speed-control {
-        margin-left: auto;
-        margin-right: 0;
-        padding: 0.38rem 0.55rem;
-      }
-
+      /* === Results carousel === */
+      .results-panel { padding: 0.6rem 0; }
+      .results-intro { font-size: 0.92rem; line-height: 1.45; }
       .results-meta {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+      }
+      .results-speed-control {
+        width: 100%;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0.32rem 0.55rem;
+      }
+      .results-speed-control .speed-slider {
+        width: auto;
+        flex: 1 1 auto;
+        min-width: 0;
       }
 
-      .results-speed-control {
-        margin-left: 0;
+      /* Result-item video columns: stack and tighten labels */
+      .columns.is-mobile { display: block; }
+      .column.is-3 { width: 100%; padding: 0.35rem 0; }
+      .selected-result-container .column-heading {
+        font-size: 0.92rem; margin: 0.55rem 0 0.3rem 0;
       }
+      .selected-result-container .video-title { font-size: 0.76rem; margin-bottom: 0.2rem; }
+      .selected-result-container .result-item .explanation-text {
+        font-size: 0.88rem; padding: 0.6rem 0.65rem;
+      }
+
+      /* Hide per-example header (already display:none in selected view, but tidy when visible) */
+      .example-header { flex-direction: column; align-items: flex-start; }
+      .speed-control { margin: 0.5rem 0 0 0; }
+
+      /* Thumbnail nav: shrink so 4 thumbs + 2 nav arrows fit on a phone */
+      .thumbnail-band { padding: 0.5rem 0.55rem; margin-top: 0.4rem; }
+      .thumbnail-band-title { font-size: 0.7rem; margin-bottom: 0.35rem; }
+
+      .result-carousel-nav {
+        grid-template-columns: 30px 1fr 30px;
+        gap: 0.3rem;
+      }
+      .result-nav-btn {
+        width: 30px; height: 30px;
+        font-size: 0.95rem;
+      }
+      .result-thumbnails {
+        gap: 0.35rem;
+        min-height: auto;
+      }
+      .result-thumb {
+        width: 80px;
+        padding: 0.28rem 0.22rem;
+        gap: 0.3rem;
+      }
+      .thumb-image, .thumb-image-fallback {
+        height: 52px;
+        font-size: 0.62rem;
+      }
+      .result-thumb .thumb-label {
+        font-size: 0.66rem;
+        line-height: 1.18;
+      }
+      .result-dots { margin-top: 0.45rem; }
+
+      /* BibTeX block */
+      .bibtex-panel { margin-top: 1.6rem; }
+      .bibtex-code-wrapper { margin-top: 0.55rem; }
+      .bibtex-code {
+        font-size: 0.78rem;
+        line-height: 1.4;
+        padding: 0.7rem;
+        padding-right: 4.2rem;
+      }
+      .bibtex-copy-btn {
+        font-size: 0.72rem;
+        padding: 0.28rem 0.55rem;
+        top: 0.35rem; right: 0.35rem;
+      }
+
+      /* Acknowledgement panel */
+      .acknowledgement-panel { margin-top: 1.6rem; }
+      .acknowledgement-panel p { font-size: 0.92rem; }
+    }
+
+    /* Extra tightening for very narrow phones (≤380px) */
+    @media screen and (max-width: 380px) {
+      .publication-links .button { font-size: 0.78rem; padding: 0.35rem 0.6rem; }
+      .publication-venue-badge { font-size: 0.98rem; }
+
+      .result-thumb { width: 68px; }
+      .thumb-image, .thumb-image-fallback { height: 44px; }
+      .result-thumb .thumb-label { font-size: 0.62rem; }
+      .result-nav-btn { width: 28px; height: 28px; font-size: 0.9rem; }
+
+      .tldr p { font-size: 0.98rem; }
+      .section-title.title.is-3 { font-size: 1.2rem !important; }
     }
   </style>
 </head>
