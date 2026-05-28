@@ -1459,9 +1459,17 @@
         min-width: 0;
       }
 
-      /* Result-item video columns: stack and tighten labels */
+      /* Result-item video columns: stack and tighten labels.
+         Selector specificity must match Bulma's
+         `.columns.is-mobile > .column.is-3` rule, otherwise the
+         columns stay pinned at 25% width and the videos look tiny. */
       .columns.is-mobile { display: block; }
-      .column.is-3 { width: 100%; padding: 0.35rem 0; }
+      .columns.is-mobile > .column.is-3 {
+        width: 100%;
+        flex: none;
+        max-width: 100%;
+        padding: 0.35rem 0;
+      }
       .selected-result-container .column-heading {
         font-size: 0.92rem; margin: 0.55rem 0 0.3rem 0;
       }
